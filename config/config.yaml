@@ -1,0 +1,26 @@
+openai:
+  #openai接口相关的配置参数
+  api_key: dd9dd719aeee4118bd601f4310318671
+  endpoint: https://oh-ai-openai-scu.openai.azure.com/
+  version: 2023-05-15
+  embed_model_name: text-embedding-ada-002  #使用的嵌入模型名称
+  max_text_len: 8191
+html:
+  fetch_method: webdriver #网页下载方法，默认使用webdriver，否则通过requests直接下载
+  driver_file: chromedriver-mac-x64/chromedriver #chromedriver文件路径
+  filter_tags: script,svg,meta #预处理中过滤的结点类型
+  css_tags: style #css所在的结点类型
+  get_remote_css: False #是否根据html中链接从远端下载css，这里下载比较耗时
+  include_css_in_html: False #是否根据selector将css属性添加到dom tree，这里selector找对应结点比较耗时
+similarity_model:
+  method: bow  #网页向量化方案，可选"bow","plain_text","html_structure",详细说明见文档
+  feature_dim_bow: 5000 #bow方法中的向量维数
+  depth_decay: 0.8 #bow方法中结点权重随深度的衰减因子
+  warmup_depth: 3 #bow方法中设置前几层不做衰减
+  min_height: 5 #html_structure方法中确定可序列化子树的最小高度
+  max_height: 10 #html_structure方法中确定可序列化子树的最大高度
+  min_code_len: 500 #html_structure方法中确定序列化后源码最大长度
+  max_depth: 10 #plain_text方法中确定最大深度，深度大于这个值的结点将被舍弃
+  embed_ignore_tags: class,id #结点表示中可以舍弃的属性类型
+  bow_threshold: 0.5 #bow方法的相似度阈值
+  embedding_threshold: 0.95 #plain_text和html_structure方法的相似度阈值
